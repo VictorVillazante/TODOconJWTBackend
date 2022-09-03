@@ -31,6 +31,13 @@ public class TodoController {
         List<TodoEntity> result = todoBl.getTodos();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+    @RequestMapping(method = RequestMethod.GET, value = "/token/{username}")
+    public ResponseEntity<String> getToken(@PathVariable String username) {
+        LOGGER.info("REQUEST: Peticion TODO token");
+        String value=this.todoBl.getToken(username);
+        return new ResponseEntity<String>(value, HttpStatus.OK);
+    }
+    
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<TodoEntity> getTodo(@PathVariable Integer id) {

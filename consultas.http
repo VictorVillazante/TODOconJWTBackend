@@ -1,8 +1,10 @@
 GET http://localhost:8080/v1/api/todo
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJCQUNLRU5EVE9ETyIsInN1YiI6Ik5pY29sZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE2NjIyMTI0MTAsImV4cCI6MTY2MjIxMzAxMH0.yOoJigS9PgQUAChFnG2Hhu0CnK2y9o0Mn_Hi4lEu_NHYHuF09B_wLskbHzlMOn54Gjdesx9b79CJH7iMHELvoA
 ###
 
 POST http://localhost:8080/v1/api/todo
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJCQUNLRU5EVE9ETyIsInN1YiI6Ik5pY29sZSIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE2NjIyMTI0MTAsImV4cCI6MTY2MjIxMzAxMH0.yOoJigS9PgQUAChFnG2Hhu0CnK2y9o0Mn_Hi4lEu_NHYHuF09B_wLskbHzlMOn54Gjdesx9b79CJH7iMHELvoA
 
 {
     "description":  "test"
@@ -21,3 +23,6 @@ Content-Type: application/json
 }
 ###
 DELETE http://localhost:8080/v1/api/todo/20
+
+###
+GET http://localhost:8080/v1/api/todo/token/Nicole

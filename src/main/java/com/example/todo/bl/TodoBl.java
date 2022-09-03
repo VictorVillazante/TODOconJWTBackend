@@ -6,13 +6,19 @@ import com.example.todo.dto.TodoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class TodoBl {
     private Logger LOGGER = LoggerFactory.getLogger(TodoBl.class);
@@ -66,6 +72,22 @@ public class TodoBl {
         TodoEntity todo = this.todoRepository.findById(id).orElseThrow();
         this.todoRepository.delete(todo);
         return "OK";
+    }
+    public String getToken(String username){
+        String secret ="TODO";
+        List<GrantedAuthority> authorities=AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+
+        String jwt= Jwts.builder()
+        .setId("BACKENDTODO")
+        .setSubject(username)
+        .claim("authorities", authorities.stream()
+        .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+        .setIssuedAt(new Date())
+        .setExpiration(new Date(System.currentTimeMillis()+600000))
+        .signWith(SignatureAlgorithm.HS512, secret.getBytes())
+		.compact();
+
+        return jwt;
     }
 
 }
